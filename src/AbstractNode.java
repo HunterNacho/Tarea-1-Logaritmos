@@ -4,17 +4,19 @@ import java.util.ArrayList;
 public abstract class AbstractNode implements INode {
 	
 	protected int t;
-	protected ArrayList<Rectangle> rectangles;
+	protected ArrayList<IRNode> elements;
 	
-	protected abstract int getLowerLimit();
+	protected int getLowerLimit() {
+		return t;
+	}
 	
 	@Override
 	public boolean underflow() {
-		return rectangles.size() < this.getLowerLimit();
+		return elements.size() < this.getLowerLimit();
 	}
 
 	@Override
 	public boolean overflow() {
-		return rectangles.size() > 2*t;
+		return elements.size() > 2*t;
 	}
 }
