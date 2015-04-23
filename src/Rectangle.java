@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Rectangle {
 	
@@ -13,9 +14,27 @@ public class Rectangle {
 		bottomRightCorner = new Point(Math.max(x1, x2), Math.min(y1, y2));
 	}
 	
-	public Rectangle minimumBoundingRectangle(Rectangle anotherRectangle) {
-		Point newTopLeft = Point.getTopLeft(topLeftCorner, anotherRectangle.topLeftCorner);
-		Point newBottomRight = Point.getBottomRight(bottomRightCorner, anotherRectangle.bottomRightCorner);
+	public static Rectangle minimumBoundingRectangle(Rectangle aRectangle, Rectangle anotherRectangle) {
+		Point newTopLeft = Point.getTopLeft(aRectangle.topLeftCorner, anotherRectangle.topLeftCorner);
+		Point newBottomRight = Point.getBottomRight(aRectangle.bottomRightCorner, anotherRectangle.bottomRightCorner);
 		return new Rectangle(newTopLeft, newBottomRight);
 	}
+	
+	public static Rectangle minimumBoundingRectangle(ArrayList<Rectangle> rectangles) {
+		assert(rectangles.size() > 0);
+		Rectangle result = rectangles.get(0);
+		for (int i = 1; i < rectangles.size(); i++) {
+			result = minimumBoundingRectangle(result, rectangles.get(i));
+		}
+		return result;
+	}
+	
+	public double distanceTo(Rectangle other) {
+		return this.getMiddlePoint().distanceTo(other.getMiddlePoint());
+	}
+
+	public Point getMiddlePoint() {
+		return Point.getMiddlePoint(topLeftCorner, bottomRightCorner);
+	}
+	
 }
