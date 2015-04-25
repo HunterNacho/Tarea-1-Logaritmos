@@ -39,4 +39,17 @@ public class Rectangle {
 		return Point.getMiddlePoint(topLeftCorner, bottomRightCorner);
 	}
 	
+	public double getHeight() {
+		return Point.getYDistance(topLeftCorner, bottomRightCorner);
+	}
+	
+	public double getWidth() {
+		return Point.getXDistance(topLeftCorner, bottomRightCorner);
+	}
+	
+	public double getArea() {
+		return getHeight() * getWidth();
+	}
+	
+	
 }

@@ -21,7 +21,15 @@ public class Point{
 		return new Point(Math.max(point1.x, point2.x), Math.min(point1.y, point2.y));
 	}
 
-	public static Point getMiddlePoint(Point topLeftCorner, Point bottomRightCorner) {
-		return new Point((topLeftCorner.x + bottomRightCorner.x)/2, (topLeftCorner.y + bottomRightCorner.y)/2);
+	public static Point getMiddlePoint(Point point1, Point point2) {
+		return new Point((point1.x + point2.x)/2, (point1.y + point2.y)/2);
+	}
+	
+	public static double getXDistance(Point point1, Point point2) {
+		return Math.abs(point1.x - point2.x);		
+	}
+	
+	public static double getYDistance(Point point1, Point point2) {
+		return Math.abs(point1.y - point2.y);
 	}
 }
