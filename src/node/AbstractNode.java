@@ -1,4 +1,7 @@
+package node;
 import java.util.ArrayList;
+
+import rnode.IRNode;
 
 
 public abstract class AbstractNode implements INode {

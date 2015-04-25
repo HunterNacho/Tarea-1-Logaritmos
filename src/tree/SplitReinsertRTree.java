@@ -1,3 +1,6 @@
+package tree;
+import geometry.Rectangle;
+
 import java.util.ArrayList;
 
 

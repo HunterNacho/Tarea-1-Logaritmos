@@ -1,3 +1,5 @@
+package node;
+
 
 public class RootNode extends AbstractNode {
 

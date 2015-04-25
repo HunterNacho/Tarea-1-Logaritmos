@@ -1,3 +1,6 @@
+package tree;
+import node.INode;
+
 
 public abstract class AbstractRTree implements IRTree{
 	protected final int t = 50;
