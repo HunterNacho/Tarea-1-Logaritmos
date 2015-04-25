@@ -32,4 +32,9 @@ public class Point{
 	public static double getYDistance(Point point1, Point point2) {
 		return Math.abs(point1.y - point2.y);
 	}
+	
+	public boolean isInside(Rectangle rectangle) {
+		return x > rectangle.getTopLeftCorner().x && x < rectangle.getBottomRightCorner().x
+				&& y > rectangle.getBottomRightCorner().y && y < rectangle.getTopLeftCorner().y;
+	}
 }
