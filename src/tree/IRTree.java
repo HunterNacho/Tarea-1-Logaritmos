@@ -5,6 +5,6 @@ import java.util.ArrayList;
 
 public interface IRTree {
 
-	public abstract ArrayList<Rectangle> buscar(Rectangle rect);
-	
+	public abstract ArrayList<Rectangle> buscar(Rectangle rectangle);
+	public abstract void insertar(Rectangle rectangle);
 }

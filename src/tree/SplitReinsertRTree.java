@@ -1,15 +1,13 @@
 package tree;
 import geometry.Rectangle;
 
-import java.util.ArrayList;
-
 
 public class SplitReinsertRTree extends AbstractRTree {
 
 	@Override
-	public ArrayList<Rectangle> buscar(Rectangle rect) {
+	public void insertar(Rectangle rectangle) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 }
