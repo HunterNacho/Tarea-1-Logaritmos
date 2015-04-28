@@ -33,6 +33,7 @@ public class Point{
 		return Math.abs(point1.y - point2.y);
 	}
 	
+	@Deprecated
 	public boolean isInside(Rectangle rectangle) {
 		return x > rectangle.getTopLeftCorner().x && x < rectangle.getBottomRightCorner().x
 				&& y > rectangle.getBottomRightCorner().y && y < rectangle.getTopLeftCorner().y;
