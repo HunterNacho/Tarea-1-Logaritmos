@@ -34,4 +34,25 @@ public abstract class AbstractNode implements INode {
 		return result;
 	}
 	
+	@Override
+	public void insertar(Rectangle rectangle, boolean shouldReinsert) {
+		if(elements.get(0).getNext().isLeaf()) {
+			ArrayList<Double> minOverlaps = new ArrayList<Double>();
+			double minOverlap = Double.MAX_VALUE;
+			for(RNode n : elements) {
+//				if(rectangle.overlap())
+				
+			}
+			
+		}
+		else {
+			
+		}
+	}
+	
+	@Override
+	public boolean isLeaf(){
+		return false;
+	}
+	
 }
