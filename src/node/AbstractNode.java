@@ -3,13 +3,13 @@ import geometry.Rectangle;
 
 import java.util.ArrayList;
 
-import rnode.IRNode;
+import rnode.RNode;
 
 
 public abstract class AbstractNode implements INode {
 	
 	protected int t;
-	protected ArrayList<IRNode> elements;
+	protected ArrayList<RNode> elements;
 	
 	protected int getLowerLimit() {
 		return t;
@@ -28,7 +28,7 @@ public abstract class AbstractNode implements INode {
 	@Override
 	public ArrayList<Rectangle> buscar(Rectangle rectangle) {
 		ArrayList<Rectangle> result = new ArrayList<Rectangle>();
-		for (IRNode element : elements) 
+		for (RNode element : elements) 
 			if (element.getRectangle().intersects(rectangle)) 
 				result.addAll(element.getNext().buscar(rectangle));
 		return result;

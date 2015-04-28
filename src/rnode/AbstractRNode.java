@@ -2,7 +2,7 @@ package rnode;
 import node.INode;
 import geometry.Rectangle;
 
-
+@Deprecated
 public abstract class AbstractRNode implements IRNode {
 	protected Rectangle rectangle;
 	protected INode next;

@@ -6,8 +6,7 @@ public class SplitReinsertRTree extends AbstractRTree {
 
 	@Override
 	public void insertar(Rectangle rectangle) {
-		// TODO Auto-generated method stub
-		
+		root.insertar(rectangle, true);		
 	}
 
 }

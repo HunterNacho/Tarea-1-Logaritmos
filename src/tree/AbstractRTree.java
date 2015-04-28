@@ -14,4 +14,5 @@ public abstract class AbstractRTree implements IRTree{
 	public ArrayList<Rectangle> buscar(Rectangle rectangle) {
 		return root.buscar(rectangle);
 	}
+	
 }
