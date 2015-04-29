@@ -13,6 +13,10 @@ public class Rectangle {
 		bottom = Math.min(y1, y2);
 	}
 	
+	public Rectangle extendWith(Rectangle rectangle) {
+		return minimumBoundingRectangle(this, rectangle);
+	}
+	
 	public static Rectangle minimumBoundingRectangle(Rectangle aRectangle, Rectangle anotherRectangle) {
 		double newTop = Math.max(aRectangle.top, anotherRectangle.top);
 		double newBottom = Math.min(aRectangle.bottom, anotherRectangle.bottom);
@@ -79,6 +83,14 @@ public class Rectangle {
 				(left >= other.right) ||
 				(bottom >= other.top) ||
 				(top <= other.bottom));
+	}
+	
+	public static double commonArea(Rectangle rectangle1, Rectangle rectangle2) {
+		if(!rectangle1.intersects(rectangle2))
+			return 0;
+		double xOverlap = Math.min(rectangle1.right, rectangle2.right) - Math.max(rectangle1.left, rectangle2.left);
+		double yOverlap = Math.min(rectangle1.top, rectangle2.top) - Math.max(rectangle1.bottom, rectangle2.bottom);
+		return yOverlap*xOverlap;
 	}
 	
 

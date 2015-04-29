@@ -5,12 +5,13 @@ import java.util.ArrayList;
 
 import rnode.RNode;
 
-
+ 
 public abstract class AbstractNode implements INode {
-	
+	 
 	protected int t;
+	 
 	protected ArrayList<RNode> elements;
-	
+	 
 	protected int getLowerLimit() {
 		return t;
 	}
@@ -27,6 +28,7 @@ public abstract class AbstractNode implements INode {
 	
 	@Override
 	public ArrayList<Rectangle> buscar(Rectangle rectangle) {
+		 
 		ArrayList<Rectangle> result = new ArrayList<Rectangle>();
 		for (RNode element : elements) 
 			if (element.getRectangle().intersects(rectangle)) 
@@ -34,13 +36,13 @@ public abstract class AbstractNode implements INode {
 		return result;
 	}
 	
-	@Override
+	@Override  
 	public void insertar(Rectangle rectangle, boolean shouldReinsert) {
 		if(elements.get(0).getNext().isLeaf()) {
 			ArrayList<Double> minOverlaps = new ArrayList<Double>();
 			double minOverlap = Double.MAX_VALUE;
 			for(RNode n : elements) {
-//				if(rectangle.overlap())
+				//if ()
 				
 			}
 			
@@ -54,5 +56,4 @@ public abstract class AbstractNode implements INode {
 	public boolean isLeaf(){
 		return false;
 	}
-	
 }
