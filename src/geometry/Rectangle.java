@@ -90,8 +90,15 @@ public class Rectangle {
 			return 0;
 		double xOverlap = Math.min(rectangle1.right, rectangle2.right) - Math.max(rectangle1.left, rectangle2.left);
 		double yOverlap = Math.min(rectangle1.top, rectangle2.top) - Math.max(rectangle1.bottom, rectangle2.bottom);
-		return yOverlap*xOverlap;
+		return yOverlap * xOverlap;
 	}
 	
-
+	public double overlap(ArrayList<Rectangle> siblings) {
+		double sum = 0;
+		for (Rectangle rectangle : siblings) 
+			sum += commonArea(this, rectangle);
+		sum -= this.getArea();
+		return sum;
+	}
+	
 }
