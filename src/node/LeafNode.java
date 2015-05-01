@@ -23,7 +23,7 @@ public class LeafNode extends AbstractNode {
 	public void insertar(Rectangle rectangle, boolean shouldReinsert) {
 		elements.add(new RNode(rectangle, null));
 		if (overflow()){
-//			onOverflow();
+			
 		}
 		
 	}

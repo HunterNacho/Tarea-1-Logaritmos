@@ -68,6 +68,7 @@ public abstract class AbstractNode implements INode {
 			next = getMinDeltaArea(elements, rectangle);
 		}
 		next.getNext().insertar(rectangle, shouldReinsert);
+		next.updateMbr();
 	}
 	
 	@Override

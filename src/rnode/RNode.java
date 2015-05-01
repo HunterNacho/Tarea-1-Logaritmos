@@ -17,4 +17,8 @@ public class RNode {
 	public INode getNext() {
 		return next;
 	}
+	
+	public void updateMbr() {
+		rectangle = Rectangle.minimumBoundingRectangle(next.getRectangles());
+	}
 }
