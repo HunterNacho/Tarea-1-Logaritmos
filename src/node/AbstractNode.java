@@ -176,10 +176,10 @@ public abstract class AbstractNode implements INode {
 		double minSumArea = Double.MAX_VALUE;
 		int index = extreme;
 		
-		for(int j=extreme; j<=(elements.size()-extreme); j++) {
+		for(int j=extreme; j<=(toSplit.size()-extreme); j++) {
 			
-			Rectangle mbrIzq = Rectangle.minimumBoundingRectangle(getRectangles(bottomSorted.subList(0, j+1)));
-			Rectangle mbrDer = Rectangle.minimumBoundingRectangle(getRectangles(bottomSorted.subList(j+1, elements.size())));
+			Rectangle mbrIzq = Rectangle.minimumBoundingRectangle(getRectangles(toSplit.subList(0, j+1)));
+			Rectangle mbrDer = Rectangle.minimumBoundingRectangle(getRectangles(toSplit.subList(j+1, toSplit.size())));
 			
 			double intersection = Rectangle.commonArea(mbrIzq, mbrDer);
 			
