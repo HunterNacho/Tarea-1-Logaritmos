@@ -14,8 +14,13 @@ public abstract class AbstractNode implements INode {
 	 
 	protected int t;
 	 
-	protected ArrayList<RNode> elements;
+	protected List<RNode> elements;
 	 
+	protected AbstractNode(List<RNode> elements, int t) {
+		this.elements = elements;
+		this.t = t;
+	}
+
 	protected int getLowerLimit() {
 		return t;
 	}
@@ -87,7 +92,7 @@ public abstract class AbstractNode implements INode {
 		return false;
 	}
 	
-	public static RNode getMinDeltaArea(ArrayList<RNode> rNodes, Rectangle toInsert) {
+	public static RNode getMinDeltaArea(List<RNode> rNodes, Rectangle toInsert) {
 		ArrayList<RNode> minDeltaRNodes = new ArrayList<RNode>();
 		double minDeltaArea = Double.MAX_VALUE;
 		for(RNode n : rNodes) {
@@ -198,6 +203,7 @@ public abstract class AbstractNode implements INode {
 					index = j;
 			}			
 		}
+		INode newNode = this.createInstance(toSplit.subList(index+1, toSplit.size()));
 		return null;
 	}
 }

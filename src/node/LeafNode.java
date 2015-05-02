@@ -3,6 +3,7 @@ package node;
 import geometry.Rectangle;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import rnode.RNode;
 
@@ -10,6 +11,10 @@ import rnode.RNode;
 
 public class LeafNode extends AbstractNode {
 	
+	public LeafNode(List<RNode> elements, int t) {
+		super(elements, t);
+	}
+
 	@Override
 	public ArrayList<Rectangle> buscar(Rectangle rectangle) {
 		ArrayList<Rectangle> result = new ArrayList<Rectangle>();
@@ -32,4 +37,10 @@ public class LeafNode extends AbstractNode {
 	public boolean isLeaf() {
 		return true;
 	}
+
+	@Override
+	public INode createInstance(List<RNode> elements) {
+		return new LeafNode(elements, t);
+	}
+
 }
