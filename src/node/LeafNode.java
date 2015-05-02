@@ -20,12 +20,12 @@ public class LeafNode extends AbstractNode {
 	}
 
 	@Override
-	public void insertar(Rectangle rectangle, boolean shouldReinsert) {
+	public RNode insertar(Rectangle rectangle, boolean shouldReinsert) {
 		elements.add(new RNode(rectangle, null));
 		if (overflow()){
-			
+			return this.split();
 		}
-		
+		return null;
 	}
 	
 	@Override
