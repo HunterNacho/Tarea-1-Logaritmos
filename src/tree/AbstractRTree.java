@@ -5,9 +5,9 @@ import node.INode;
 import geometry.Rectangle;
 
 public abstract class AbstractRTree implements IRTree{
-	protected final int t = 50;
-	protected final double m = 0.4;
-	protected final double p = 0.3;
+	public static final int t = 50;
+	public static final double m = 0.4;
+	public static final double p = 0.3;
 	protected INode root;
 	
 	@Override
