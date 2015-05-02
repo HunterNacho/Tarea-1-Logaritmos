@@ -41,7 +41,7 @@ public abstract class AbstractNode implements INode {
 	}
 	
 	@Override  
-	public void insertar(Rectangle rectangle, boolean shouldReinsert) {
+	public RNode insertar(Rectangle rectangle, boolean shouldReinsert) {
 		RNode next;
 		if(elements.get(0).getNext().isLeaf()) {
 			ArrayList<RNode> minDeltaRNodes = new ArrayList<RNode>();
@@ -58,7 +58,7 @@ public abstract class AbstractNode implements INode {
 						minDeltaRNodes.clear();
 						minDeltaRNodes.add(n);
 						minDelta = delta;
-					}					
+					}
 				}							
 			}
 			
@@ -71,8 +71,15 @@ public abstract class AbstractNode implements INode {
 		else {
 			next = getMinDeltaArea(elements, rectangle);
 		}
-		next.getNext().insertar(rectangle, shouldReinsert);
+		RNode result = next.getNext().insertar(rectangle, shouldReinsert);
 		next.updateMbr();
+		if (result != null) {
+			elements.add(result);
+		}
+		if (overflow()) {
+			return this.split();
+		}
+		return null;
 	}
 	
 	@Override
