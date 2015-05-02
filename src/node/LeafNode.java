@@ -3,7 +3,6 @@ package node;
 import geometry.Rectangle;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import rnode.RNode;
 

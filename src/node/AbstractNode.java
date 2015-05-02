@@ -207,6 +207,8 @@ public abstract class AbstractNode implements INode {
 		ArrayList<RNode> newElements = new ArrayList<RNode>(toSplit.subList(index+1, toSplit.size()));
 		INode newNode = this.createInstance(newElements);
 		Rectangle newMbr = Rectangle.minimumBoundingRectangle(getRectangles(newElements));
-		return null;
+		RNode newRNode = new RNode(newMbr, newNode);
+		this.elements = new ArrayList<RNode>(toSplit.subList(0, index + 1));
+		return newRNode;
 	}
 }
