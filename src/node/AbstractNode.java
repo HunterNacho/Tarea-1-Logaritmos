@@ -14,9 +14,9 @@ public abstract class AbstractNode implements INode {
 	 
 	protected int t;
 	 
-	protected List<RNode> elements;
+	protected ArrayList<RNode> elements;
 	 
-	protected AbstractNode(List<RNode> elements, int t) {
+	protected AbstractNode(ArrayList<RNode> elements, int t) {
 		this.elements = elements;
 		this.t = t;
 	}
@@ -203,7 +203,10 @@ public abstract class AbstractNode implements INode {
 					index = j;
 			}			
 		}
-		INode newNode = this.createInstance(toSplit.subList(index+1, toSplit.size()));
+		
+		ArrayList<RNode> newElements = new ArrayList<RNode>(toSplit.subList(index+1, toSplit.size()));
+		INode newNode = this.createInstance(newElements);
+		Rectangle newMbr = Rectangle.minimumBoundingRectangle(getRectangles(newElements));
 		return null;
 	}
 }

@@ -3,7 +3,6 @@ package node;
 import geometry.Rectangle;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import rnode.RNode;
 
@@ -14,5 +13,5 @@ public interface INode {
 	public RNode insertar(Rectangle rectangle, boolean shouldReinsert);
 	public boolean isLeaf();
 	public ArrayList<Rectangle> getRectangles();
-	public INode createInstance(List<RNode> elements);
+	public INode createInstance(ArrayList<RNode> elements);
 }

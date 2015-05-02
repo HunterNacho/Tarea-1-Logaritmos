@@ -1,12 +1,12 @@
 package node;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import rnode.RNode;
 
 public class RootNode extends AbstractNode {
 
-	protected RootNode(List<RNode> elements, int t) {
+	protected RootNode(ArrayList<RNode> elements, int t) {
 		super(elements, t);
 	}
 
@@ -16,7 +16,7 @@ public class RootNode extends AbstractNode {
 	}
 
 	@Override
-	public INode createInstance(List<RNode> elements) {
+	public INode createInstance(ArrayList<RNode> elements) {
 		return new RootNode(elements, t);
 	}
 

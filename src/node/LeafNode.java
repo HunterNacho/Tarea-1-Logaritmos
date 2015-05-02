@@ -11,7 +11,7 @@ import rnode.RNode;
 
 public class LeafNode extends AbstractNode {
 	
-	public LeafNode(List<RNode> elements, int t) {
+	public LeafNode(ArrayList<RNode> elements, int t) {
 		super(elements, t);
 	}
 
@@ -39,7 +39,7 @@ public class LeafNode extends AbstractNode {
 	}
 
 	@Override
-	public INode createInstance(List<RNode> elements) {
+	public INode createInstance(ArrayList<RNode> elements) {
 		return new LeafNode(elements, t);
 	}
 
