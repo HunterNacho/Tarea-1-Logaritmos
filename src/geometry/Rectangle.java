@@ -53,6 +53,9 @@ public class Rectangle {
 	public double getArea() {
 		return getHeight() * getWidth();
 	}
+	public double getPerimeter() {
+		return 2*(getHeight() + getWidth());
+	}
 	
 	public Point getTopLeftCorner() {
 		return new Point(left, top);
@@ -66,6 +69,22 @@ public class Rectangle {
 		return new Point(right, top);
 	}
 	
+	public double getLeft() {
+		return left;
+	}
+
+	public double getTop() {
+		return top;
+	}
+
+	public double getRight() {
+		return right;
+	}
+
+	public double getBottom() {
+		return bottom;
+	}
+
 	public Point getBottomLeftCorner() {
 		return new Point(left, bottom);
 	}
