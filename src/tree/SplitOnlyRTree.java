@@ -1,13 +1,13 @@
 package tree;
+import rnode.RNode;
 import geometry.Rectangle;
 
 
 public class SplitOnlyRTree extends AbstractRTree {
 
 	@Override
-	public void insertar(Rectangle rectangle) {
-		root.insertar(rectangle, false);
-		
+	public boolean shouldReinsert() {
+		return false;
 	}
 
 }

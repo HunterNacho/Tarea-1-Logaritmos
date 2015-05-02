@@ -14,4 +14,5 @@ public interface INode {
 	public boolean isLeaf();
 	public ArrayList<Rectangle> getRectangles();
 	public INode createInstance(ArrayList<RNode> elements);
+	public ArrayList<RNode> getElements();
 }

@@ -211,4 +211,9 @@ public abstract class AbstractNode implements INode {
 		this.elements = new ArrayList<RNode>(toSplit.subList(0, index + 1));
 		return newRNode;
 	}
+	
+	@Override
+	public ArrayList<RNode> getElements() {
+		return elements;
+	}
 }
