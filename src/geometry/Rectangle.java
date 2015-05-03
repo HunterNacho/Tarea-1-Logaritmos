@@ -117,9 +117,10 @@ public class Rectangle {
 	
 	public double overlap(ArrayList<Rectangle> siblings) {
 		double sum = 0;
-		for (Rectangle rectangle : siblings) 
-			sum += commonArea(this, rectangle);
-		sum -= this.getArea();
+		for (Rectangle rectangle : siblings) {
+			if (!this.equals(rectangle))
+				sum += commonArea(this, rectangle);
+		}
 		return sum;
 	}
 
