@@ -32,12 +32,12 @@ public class LeafNode extends AbstractNode {
 	public RNode insertar(Rectangle rectangle, boolean shouldReinsert) {
 		elements.add(new RNode(rectangle, null));
 		if (overflow()){
-			if (shouldReinsert && tree.getOverflow(getDepth())) {
+			if (shouldReinsert && !tree.getOverflow(getDepth())) {
 				Collections.sort(elements, new RectangleComparators.CompareByDistance(Rectangle.minimumBoundingRectangle(getRectangles())));
 				int extreme = (int) Math.floor(AbstractRTree.p*elements.size());
 				ArrayList<RNode> toReinsert = new ArrayList<RNode>(elements.subList(0, extreme + 1));
 				elements = new ArrayList<RNode>(elements.subList(extreme + 1, elements.size()));
-				tree.reinsert(toReinsert);
+				tree.reinsert(toReinsert, getDepth());
 				return null;
 			}
 			else
@@ -57,10 +57,10 @@ public class LeafNode extends AbstractNode {
 	}
 	
 	@Override
-	public void updateDepth(int newDepth){
-		this.depth = newDepth;
+	public int getDepth() {
+		return 0;
 	}
-
+	
 	@Override
 	public Color drawColor() {
 		return Color.GREEN;

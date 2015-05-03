@@ -31,22 +31,18 @@ public class RootNode extends AbstractNode {
 		else
 			return new ConcreteNode(elements, t, tree);
 	}
-
-	public void updateDepth() {
-		this.updateDepth(0);
-	}
 	
 	@Override
 	public RNode insertar(Rectangle rectangle, boolean shouldReinsert) {
 		if (isLeaf()) {
 			elements.add(new RNode(rectangle, null));
 			if (overflow()){
-				if (shouldReinsert && tree.getOverflow(getDepth())) {
+				if (shouldReinsert && !tree.getOverflow(getDepth())) {
 					Collections.sort(elements, new RectangleComparators.CompareByDistance(Rectangle.minimumBoundingRectangle(getRectangles())));
 					int extreme = (int) Math.floor(AbstractRTree.p*elements.size());
 					ArrayList<RNode> toReinsert = new ArrayList<RNode>(elements.subList(0, extreme + 1));
 					elements = new ArrayList<RNode>(elements.subList(extreme + 1, elements.size()));
-					tree.reinsert(toReinsert);
+					tree.reinsert(toReinsert, getDepth());
 					return null;
 				}
 				else
@@ -62,14 +58,6 @@ public class RootNode extends AbstractNode {
 	public boolean isLeaf() {
 		return elements.isEmpty() || elements.get(0).getNext() == null;
 	}
-	
-	@Override
-	public void updateDepth(int newDepth){
-		if (isLeaf())
-			this.depth = newDepth;
-		else
-			super.updateDepth(newDepth);
-	}
 
 	@Override
 	public Color drawColor() {
@@ -81,6 +69,12 @@ public class RootNode extends AbstractNode {
 		g.setColor(Color.RED);
 		Rectangle.minimumBoundingRectangle(getRectangles()).draw(g);
 		super.draw(g);
+	}
+	
+	@Override
+	public int getDepth() {
+		if (isLeaf()) return 0;
+		return super.getDepth();
 	}
 	
 }

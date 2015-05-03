@@ -1,7 +1,9 @@
 package tree;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 
 import rnode.RNode;
 
@@ -15,15 +17,42 @@ public abstract class AbstractRTree implements IRTree{
 	public static final double p = 0.3;
 	protected RootNode root;
 	public ArrayList<Boolean> overflow = new ArrayList<Boolean>();
+	private ArrayList<Color> colors;
+	private int colorIndex;
 	
 	protected AbstractRTree(int t) {
 		this.t = t;
 		overflow.add(false);
 		root = new RootNode(new ArrayList<RNode>(), t, this);
+		colors = new ArrayList<Color>();
+		colors.add(Color.RED);
+		colors.add(Color.PINK);
+		colors.add(Color.ORANGE);
+		colors.add(Color.YELLOW);
+		colors.add(Color.GREEN);
+		colors.add(Color.MAGENTA);
+		colors.add(Color.CYAN);
+		colors.add(Color.BLUE);
+//		colors.add(Color.BLACK);
+//		colors.add(Color.DARK_GRAY);
+//		colors.add(Color.GRAY);
+//		colors.add(Color.LIGHT_GRAY);
+		resetColor();
 	}
 	
+
 	protected AbstractRTree() {
 		this(50);
+	}
+	
+	public void resetColor() {
+		colorIndex = 0;
+	}
+	
+	public Color nextColor() {
+		Color color = colors.get(colorIndex);
+		colorIndex = (colorIndex + 1) % colors.size();
+		return color;
 	}
 	
 	@Override
@@ -48,17 +77,11 @@ public abstract class AbstractRTree implements IRTree{
 		newRootElements.add(aux);
 		newRootElements.add(newNode);
 		root = new RootNode(newRootElements, t, this);
-		updateDepth();
+		overflow.add(false);
 	}
 	
 	@Override
-	public void updateDepth() {
-		root.updateDepth();
-	}
-	
-	@Override
-	public void reinsert(ArrayList<RNode> elements) {
-		int insertionDepth = elements.get(0).getNext().getDepth() - 1;
+	public void reinsert(ArrayList<RNode> elements, int insertionDepth) {
 		overflow.set(insertionDepth, true);
 		Collections.reverse(elements);
 		for (RNode node : elements) {
@@ -72,11 +95,6 @@ public abstract class AbstractRTree implements IRTree{
 	@Override
 	public boolean getOverflow(int depth) {
 		return overflow.size() > depth && overflow.get(depth);
-	}
-	
-	@Override
-	public String toString() {
-		return "[ " + root.toString() + "]";
 	}
 	
 	@Override

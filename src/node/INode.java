@@ -19,7 +19,6 @@ public interface INode {
 	public INode createInstance(ArrayList<RNode> elements);
 	public ArrayList<RNode> getElements();
 	public int getDepth();
-	public void updateDepth(int i);
 	public void draw(Graphics g);
 	public Color drawColor();
 }

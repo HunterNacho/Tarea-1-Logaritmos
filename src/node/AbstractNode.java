@@ -86,12 +86,12 @@ public abstract class AbstractNode implements INode {
 			elements.add(result);
 		}
 		if (this.overflow()) {
-			if (shouldReinsert && tree.getOverflow(getDepth())) {
+			if (shouldReinsert && !tree.getOverflow(getDepth())) {
 				Collections.sort(elements, new RectangleComparators.CompareByDistance(Rectangle.minimumBoundingRectangle(getRectangles())));
 				int extreme = (int) Math.floor(AbstractRTree.p*elements.size());
 				ArrayList<RNode> toReinsert = new ArrayList<RNode>(elements.subList(0, extreme + 1));
 				elements = new ArrayList<RNode>(elements.subList(extreme + 1, elements.size()));
-				tree.reinsert(toReinsert);
+				tree.reinsert(toReinsert, getDepth());
 				return null;
 			}
 			else
@@ -232,15 +232,7 @@ public abstract class AbstractNode implements INode {
 	
 	@Override
 	public int getDepth() {
-		return depth;
-	}
-	
-	@Override
-	public void updateDepth(int newDepth) {
-		this.depth = newDepth;
-		for (RNode node : elements) {
-			node.getNext().updateDepth(getDepth() + 1);
-		}
+		return 1 + elements.get(0).getNext().getDepth();
 	}
 
 	@Override
@@ -285,12 +277,12 @@ public abstract class AbstractNode implements INode {
 			}
 		}
 		if (overflow()) {
-			if (tree.getOverflow(getDepth())) {
+			if (!tree.getOverflow(getDepth())) {
 				Collections.sort(elements, new RectangleComparators.CompareByDistance(Rectangle.minimumBoundingRectangle(getRectangles())));
 				int extreme = (int) Math.floor(AbstractRTree.p * elements.size());
 				ArrayList<RNode> toReinsert = new ArrayList<RNode>(elements.subList(0, extreme + 1));
 				elements = new ArrayList<RNode>(elements.subList(extreme + 1, elements.size()));
-				tree.reinsert(toReinsert);
+				tree.reinsert(toReinsert, getDepth());
 				return null;
 			}
 			else
@@ -305,7 +297,7 @@ public abstract class AbstractNode implements INode {
 			for (RNode node : elements)
 				node.getNext().draw(g);
 		}
-		g.setColor(this.drawColor());
+		g.setColor(tree.nextColor());
 		for (RNode node : elements)
 			node.getRectangle().draw(g);
 	}

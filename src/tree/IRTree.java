@@ -1,6 +1,7 @@
 package tree;
 import geometry.Rectangle;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -12,8 +13,8 @@ public interface IRTree {
 	public void insertar(Rectangle rectangle);
 	public void updateRoot(RNode newNode);
 	public boolean shouldReinsert();
-	public void updateDepth();
-	public void reinsert(ArrayList<RNode> elements);
+	public void reinsert(ArrayList<RNode> elements, int insertionDepth);
 	public boolean getOverflow(int depth);
 	public void draw(Graphics g);
+	public Color nextColor();
 }
