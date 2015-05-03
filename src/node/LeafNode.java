@@ -1,10 +1,14 @@
 package node;
 
 import geometry.Rectangle;
+import geometry.RectangleComparators;
 
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import rnode.RNode;
+import tree.AbstractRTree;
 import tree.IRTree;
 
 
@@ -28,7 +32,16 @@ public class LeafNode extends AbstractNode {
 	public RNode insertar(Rectangle rectangle, boolean shouldReinsert) {
 		elements.add(new RNode(rectangle, null));
 		if (overflow()){
-			return this.split();
+			if (shouldReinsert && tree.getOverflow(getDepth())) {
+				Collections.sort(elements, new RectangleComparators.CompareByDistance(Rectangle.minimumBoundingRectangle(getRectangles())));
+				int extreme = (int) Math.floor(AbstractRTree.p*elements.size());
+				ArrayList<RNode> toReinsert = new ArrayList<RNode>(elements.subList(0, extreme + 1));
+				elements = new ArrayList<RNode>(elements.subList(extreme + 1, elements.size()));
+				tree.reinsert(toReinsert);
+				return null;
+			}
+			else
+				return this.split();
 		}
 		return null;
 	}
@@ -43,5 +56,13 @@ public class LeafNode extends AbstractNode {
 		return new LeafNode(elements, t, tree);
 	}
 	
-	
+	@Override
+	public void updateDepth(int newDepth){
+		this.depth = newDepth;
+	}
+
+	@Override
+	public Color drawColor() {
+		return Color.GREEN;
+	}
 }

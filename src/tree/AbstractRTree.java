@@ -1,20 +1,30 @@
 package tree;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import rnode.RNode;
 
-import node.ConcreteNode;
 import node.INode;
 import node.RootNode;
 import geometry.Rectangle;
 
 public abstract class AbstractRTree implements IRTree{
-	public static final int t = 50;
+	public int t;
 	public static final double m = 0.4;
 	public static final double p = 0.3;
 	protected RootNode root;
 	public ArrayList<Boolean> overflow = new ArrayList<Boolean>();
+	
+	protected AbstractRTree(int t) {
+		this.t = t;
+		overflow.add(false);
+		root = new RootNode(new ArrayList<RNode>(), t, this);
+	}
+	
+	protected AbstractRTree() {
+		this(50);
+	}
 	
 	@Override
 	public ArrayList<Rectangle> buscar(Rectangle rectangle) {
@@ -32,7 +42,7 @@ public abstract class AbstractRTree implements IRTree{
 	
 	@Override
 	public void updateRoot(RNode newNode) {
-		INode oldRoot = new ConcreteNode(root.getElements(), t, this);
+		INode oldRoot = root.createInstance(root.getElements());
 		RNode aux = new RNode(Rectangle.minimumBoundingRectangle(oldRoot.getRectangles()), oldRoot);
 		ArrayList<RNode> newRootElements = new ArrayList<RNode>();
 		newRootElements.add(aux);
@@ -63,4 +73,15 @@ public abstract class AbstractRTree implements IRTree{
 	public boolean getOverflow(int depth) {
 		return overflow.get(depth);
 	}
+	
+	@Override
+	public String toString() {
+		return "[ " + root.toString() + "]";
+	}
+	
+	@Override
+	public void draw(Graphics g) {
+		root.draw(g);
+	}
+	
 }

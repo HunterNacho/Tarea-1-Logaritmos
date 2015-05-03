@@ -1,5 +1,8 @@
 package geometry;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 public class Rectangle {
@@ -22,7 +25,7 @@ public class Rectangle {
 		double newBottom = Math.min(aRectangle.bottom, anotherRectangle.bottom);
 		double newLeft = Math.min(aRectangle.left, anotherRectangle.left);
 		double newRight = Math.max(aRectangle.right, anotherRectangle.right);
-		return new Rectangle(newLeft, newRight, newBottom, newTop);
+		return new Rectangle(newLeft, newTop, newRight, newBottom);
 	}
 	
 	public static Rectangle minimumBoundingRectangle(ArrayList<Rectangle> rectangles) {
@@ -118,6 +121,10 @@ public class Rectangle {
 			sum += commonArea(this, rectangle);
 		sum -= this.getArea();
 		return sum;
+	}
+
+	public void draw(Graphics g) {
+		((Graphics2D) g).draw(new Rectangle2D.Double(left , bottom, getWidth(), getHeight()));
 	}
 	
 }

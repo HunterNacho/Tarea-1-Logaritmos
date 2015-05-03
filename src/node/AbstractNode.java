@@ -2,6 +2,7 @@ package node;
 import geometry.Rectangle;
 import geometry.RectangleComparators;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -84,7 +85,7 @@ public abstract class AbstractNode implements INode {
 		if (result != null) {
 			elements.add(result);
 		}
-		if (overflow()) {
+		if (this.overflow()) {
 			if (shouldReinsert && tree.getOverflow(getDepth())) {
 				Collections.sort(elements, new RectangleComparators.CompareByDistance(Rectangle.minimumBoundingRectangle(getRectangles())));
 				int extreme = (int) Math.floor(AbstractRTree.p*elements.size());
@@ -296,6 +297,17 @@ public abstract class AbstractNode implements INode {
 				return this.split();
 		}
 		return null;
+	}
+	
+	@Override
+	public void draw(Graphics g) {
+		if (!isLeaf()) {
+			for (RNode node : elements)
+				node.getNext().draw(g);
+		}
+		g.setColor(this.drawColor());
+		for (RNode node : elements)
+			node.getRectangle().draw(g);
 	}
 	
 }
