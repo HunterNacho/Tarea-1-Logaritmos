@@ -71,7 +71,7 @@ public abstract class AbstractRTree implements IRTree{
 	
 	@Override
 	public boolean getOverflow(int depth) {
-		return overflow.get(depth);
+		return overflow.size() > depth && overflow.get(depth);
 	}
 	
 	@Override
