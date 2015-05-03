@@ -11,5 +11,7 @@ public interface IRTree {
 	public void insertar(Rectangle rectangle);
 	public void updateRoot(RNode newNode);
 	public boolean shouldReinsert();
-	
+	public void updateDepth();
+	public void reinsert(ArrayList<RNode> elements);
+	public boolean getOverflow(int depth);
 }

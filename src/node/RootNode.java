@@ -3,11 +3,12 @@ package node;
 import java.util.ArrayList;
 
 import rnode.RNode;
+import tree.IRTree;
 
 public class RootNode extends AbstractNode {
 
-	public RootNode(ArrayList<RNode> elements, int t) {
-		super(elements, t);
+	public RootNode(ArrayList<RNode> elements, int t, IRTree tree) {
+		super(elements, t, tree);
 	}
 
 	@Override
@@ -17,7 +18,11 @@ public class RootNode extends AbstractNode {
 
 	@Override
 	public INode createInstance(ArrayList<RNode> elements) {
-		return new RootNode(elements, t);
+		return new RootNode(elements, t, tree);
+	}
+
+	public void updateDepth() {
+		this.updateDepth(0);
 	}
 
 }

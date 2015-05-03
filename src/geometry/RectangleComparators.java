@@ -22,7 +22,6 @@ public class RectangleComparators {
 			return 0;
 		}
 		
-		
 	}
 	
 	public static class CompareByRight implements Comparator<RNode> {
@@ -35,7 +34,6 @@ public class RectangleComparators {
 			else if(delta >0) return 1;
 			return 0;
 		}
-		
 		
 	}
 	
@@ -50,7 +48,6 @@ public class RectangleComparators {
 			return 0;
 		}
 		
-		
 	}
 	
 	public static class CompareByBottom implements Comparator<RNode> {
@@ -64,6 +61,23 @@ public class RectangleComparators {
 			return 0;
 		}
 		
+	}
+	
+	public static class CompareByDistance implements Comparator <RNode> {
+		
+		private Rectangle center;
+		
+		public CompareByDistance(Rectangle center) {
+			this.center = center;
+		}
+		
+		@Override
+		public int compare(RNode node1, RNode node2) {
+			double delta = node2.getRectangle().distanceTo(center) - node1.getRectangle().distanceTo(center);
+			if (delta > 0) return 1;
+			if (delta < 0) return -1;
+			return 0;
+		}
 		
 	}
 

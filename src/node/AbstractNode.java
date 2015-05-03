@@ -5,20 +5,23 @@ import geometry.RectangleComparators;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import rnode.RNode;
 import tree.AbstractRTree;
+import tree.IRTree;
 
  
 public abstract class AbstractNode implements INode {
 	 
 	protected int t;
+	protected int depth;
+	protected IRTree tree;
 	 
 	protected ArrayList<RNode> elements;
 	 
-	protected AbstractNode(ArrayList<RNode> elements, int t) {
+	protected AbstractNode(ArrayList<RNode> elements, int t, IRTree tree) {
 		this.elements = elements;
 		this.t = t;
+		this.tree = tree;
 	}
 
 	protected int getLowerLimit() {
@@ -82,7 +85,16 @@ public abstract class AbstractNode implements INode {
 			elements.add(result);
 		}
 		if (overflow()) {
-			return this.split();
+			if (shouldReinsert && tree.getOverflow(getDepth())) {
+				Collections.sort(elements, new RectangleComparators.CompareByDistance(Rectangle.minimumBoundingRectangle(getRectangles())));
+				int extreme = (int) Math.floor(AbstractRTree.p*elements.size());
+				ArrayList<RNode> toReinsert = new ArrayList<RNode>(elements.subList(0, extreme + 1));
+				elements = new ArrayList<RNode>(elements.subList(extreme + 1, elements.size()));
+				tree.reinsert(toReinsert);
+				return null;
+			}
+			else
+				return this.split();
 		}
 		return null;
 	}
@@ -216,4 +228,74 @@ public abstract class AbstractNode implements INode {
 	public ArrayList<RNode> getElements() {
 		return elements;
 	}
+	
+	@Override
+	public int getDepth() {
+		return depth;
+	}
+	
+	@Override
+	public void updateDepth(int newDepth) {
+		this.depth = newDepth;
+		for (RNode node : elements) {
+			node.getNext().updateDepth(getDepth() + 1);
+		}
+	}
+
+	@Override
+	public RNode insertar(RNode node, int insertionDepth) {
+		RNode next;
+		if (this.getDepth() == insertionDepth) {
+			elements.add(node);
+		}
+		else {
+			if(elements.get(0).getNext().getDepth() == insertionDepth) {
+				ArrayList<RNode> minDeltaRNodes = new ArrayList<RNode>();
+				double minDelta = Double.MAX_VALUE;
+				for(RNode n : elements) {
+					double overlapIni = n.getRectangle().overlap(this.getRectangles());
+					double overlapFin = n.getRectangle().extendWith(node.getRectangle()).overlap(this.getRectangles());
+					double delta = overlapFin - overlapIni;
+					if(delta <= minDelta) {
+						if(delta == minDelta) { 
+							minDeltaRNodes.add(n);
+						}
+						else {
+							minDeltaRNodes.clear();
+							minDeltaRNodes.add(n);
+							minDelta = delta;
+						}
+					}							
+				}
+				
+				if(minDeltaRNodes.size() > 1) 
+					next = getMinDeltaArea(minDeltaRNodes, node.getRectangle());	
+				else
+					next = minDeltaRNodes.get(0);	
+				
+			}
+			else {
+				next = getMinDeltaArea(elements, node.getRectangle());
+			}
+			RNode result = next.getNext().insertar(node, insertionDepth);
+			next.updateMbr();
+			if (result != null) {
+				elements.add(result);
+			}
+		}
+		if (overflow()) {
+			if (tree.getOverflow(getDepth())) {
+				Collections.sort(elements, new RectangleComparators.CompareByDistance(Rectangle.minimumBoundingRectangle(getRectangles())));
+				int extreme = (int) Math.floor(AbstractRTree.p * elements.size());
+				ArrayList<RNode> toReinsert = new ArrayList<RNode>(elements.subList(0, extreme + 1));
+				elements = new ArrayList<RNode>(elements.subList(extreme + 1, elements.size()));
+				tree.reinsert(toReinsert);
+				return null;
+			}
+			else
+				return this.split();
+		}
+		return null;
+	}
+	
 }

@@ -1,7 +1,4 @@
 package tree;
-import rnode.RNode;
-import geometry.Rectangle;
-
 
 public class SplitOnlyRTree extends AbstractRTree {
 

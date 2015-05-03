@@ -1,6 +1,4 @@
 package tree;
-import geometry.Rectangle;
-
 
 public class SplitReinsertRTree extends AbstractRTree {
 

@@ -5,13 +5,14 @@ import geometry.Rectangle;
 import java.util.ArrayList;
 
 import rnode.RNode;
+import tree.IRTree;
 
 
 
 public class LeafNode extends AbstractNode {
 	
-	public LeafNode(ArrayList<RNode> elements, int t) {
-		super(elements, t);
+	public LeafNode(ArrayList<RNode> elements, int t, IRTree tree) {
+		super(elements, t, tree);
 	}
 
 	@Override
@@ -39,7 +40,8 @@ public class LeafNode extends AbstractNode {
 
 	@Override
 	public INode createInstance(ArrayList<RNode> elements) {
-		return new LeafNode(elements, t);
+		return new LeafNode(elements, t, tree);
 	}
-
+	
+	
 }
