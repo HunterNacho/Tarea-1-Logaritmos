@@ -1,6 +1,5 @@
 package node;
 
-import java.awt.Color;
 import java.util.ArrayList;
 
 import rnode.RNode;
@@ -17,11 +16,6 @@ public class ConcreteNode extends AbstractNode {
 	@Override
 	public INode createInstance(ArrayList<RNode> elements) {
 		return new ConcreteNode(elements, t, tree);
-	}
-
-	@Override
-	public Color drawColor() {
-		return Color.YELLOW;
 	}
 	
 }

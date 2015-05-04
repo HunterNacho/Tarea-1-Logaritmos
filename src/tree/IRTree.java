@@ -16,5 +16,5 @@ public interface IRTree {
 	public void reinsert(ArrayList<RNode> elements, int insertionDepth);
 	public boolean getOverflow(int depth);
 	public void draw(Graphics g);
-	public Color nextColor();
+	public Color getColor(int depth);
 }

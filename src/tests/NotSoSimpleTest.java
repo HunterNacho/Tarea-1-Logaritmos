@@ -11,16 +11,21 @@ import tree.SplitReinsertRTree;
 
 public class NotSoSimpleTest {
 	public static void main(String[] args) {
-		IRTree splitTree = new SplitOnlyRTree(3);
-		IRTree reinsertTree = new SplitReinsertRTree(3);
+		int t = 5;
+		final int TICKS = 10000;
+		IRTree splitTree = new SplitOnlyRTree(t);
+		IRTree reinsertTree = new SplitReinsertRTree(t);
 		double  x1, y1, x2, y2;
-		for (int i = 1; i <= 25; i++) {
-			x1 = Math.random()*500 + 10;
-			y1 = Math.random()*500 + 10;
-			x2 = x1 + 20;
-			y2 = y1 + 20;
+		for (int i = 1; i <= 500000; i++) {
+			x1 = Math.random()*550 + 10;
+			y1 = Math.random()*550 + 10;
+			x2 = x1 + 5;
+			y2 = y1 + 5;
 			splitTree.insertar(new Rectangle(x1, y1, x2, y2));
 			reinsertTree.insertar(new Rectangle(x1, y1, x2, y2));
+			if ((i % TICKS) == 0) {
+				System.out.println("Insertados " + i + " rectángulos.");
+			}
 		}
 		JFrame window1 = new JFrame();
 		window1.setTitle("Split Only.");

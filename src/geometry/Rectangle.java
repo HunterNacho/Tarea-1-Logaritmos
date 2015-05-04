@@ -92,14 +92,6 @@ public class Rectangle {
 		return new Point(left, bottom);
 	}
 	
-	@Deprecated
-	public boolean isContainedBy(Rectangle other) {
-		return getTopLeftCorner().isInside(other) ||
-				getTopRightCorner().isInside(other) ||
-				getBottomLeftCorner().isInside(other) ||
-				getBottomRightCorner().isInside(other);
-	}
-	
 	public boolean intersects(Rectangle other){
 		return !((right <= other.left) ||
 				(left >= other.right) ||

@@ -3,7 +3,6 @@ package node;
 import geometry.Rectangle;
 import geometry.RectangleComparators;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -61,8 +60,4 @@ public class LeafNode extends AbstractNode {
 		return 0;
 	}
 	
-	@Override
-	public Color drawColor() {
-		return Color.GREEN;
-	}
 }

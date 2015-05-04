@@ -3,7 +3,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 
 import rnode.RNode;
 
@@ -25,18 +24,14 @@ public abstract class AbstractRTree implements IRTree{
 		overflow.add(false);
 		root = new RootNode(new ArrayList<RNode>(), t, this);
 		colors = new ArrayList<Color>();
-		colors.add(Color.RED);
-		colors.add(Color.PINK);
-		colors.add(Color.ORANGE);
-		colors.add(Color.YELLOW);
-		colors.add(Color.GREEN);
-		colors.add(Color.MAGENTA);
-		colors.add(Color.CYAN);
 		colors.add(Color.BLUE);
-//		colors.add(Color.BLACK);
-//		colors.add(Color.DARK_GRAY);
-//		colors.add(Color.GRAY);
-//		colors.add(Color.LIGHT_GRAY);
+		colors.add(Color.CYAN);
+		colors.add(Color.GREEN);
+		colors.add(Color.YELLOW);
+		colors.add(Color.ORANGE);
+		colors.add(Color.PINK);
+		colors.add(Color.MAGENTA);
+		colors.add(Color.RED);
 		resetColor();
 	}
 	
@@ -100,6 +95,11 @@ public abstract class AbstractRTree implements IRTree{
 	@Override
 	public void draw(Graphics g) {
 		root.draw(g);
+	}
+	
+	@Override
+	public Color getColor(int i) {
+		return colors.get(i % colors.size());
 	}
 	
 }

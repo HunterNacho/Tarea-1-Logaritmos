@@ -57,24 +57,19 @@ public class RootNode extends AbstractNode {
 	@Override
 	public boolean isLeaf() {
 		return elements.isEmpty() || elements.get(0).getNext() == null;
-	}
-
-	@Override
-	public Color drawColor() {
-		return Color.ORANGE;
-	}
-	
-	@Override
-	public void draw(Graphics g) {
-		g.setColor(Color.RED);
-		Rectangle.minimumBoundingRectangle(getRectangles()).draw(g);
-		super.draw(g);
-	}
+	}	
 	
 	@Override
 	public int getDepth() {
 		if (isLeaf()) return 0;
 		return super.getDepth();
+	}
+	
+	@Override
+	public void draw(Graphics g) {
+		g.setColor(Color.BLACK);
+		Rectangle.minimumBoundingRectangle(getRectangles()).draw(g);
+		super.draw(g);
 	}
 	
 }

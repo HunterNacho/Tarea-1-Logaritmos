@@ -2,6 +2,7 @@ package node;
 import geometry.Rectangle;
 import geometry.RectangleComparators;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -297,9 +298,14 @@ public abstract class AbstractNode implements INode {
 			for (RNode node : elements)
 				node.getNext().draw(g);
 		}
-		g.setColor(tree.nextColor());
+		g.setColor(drawColor());
 		for (RNode node : elements)
 			node.getRectangle().draw(g);
+	}
+	
+	@Override
+	public Color drawColor() {
+		return tree.getColor(getDepth());
 	}
 	
 }
